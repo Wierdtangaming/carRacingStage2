@@ -6,15 +6,15 @@ class Player {
   }
 
   getCount(){
-    var playerCountRef = database.ref('playerCount');
-    playerCountRef.on("value",(data)=>{
-      playerCount = data.val();
+    var player_countRef = database.ref('player_count');
+    player_countRef.on("value",(data)=>{
+      player_count = data.val();
     })
   }
 
   updateCount(count){
     database.ref('/').update({
-      playerCount: count
+      player_count: count
     });
   }
 

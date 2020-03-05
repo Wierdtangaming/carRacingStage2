@@ -20,9 +20,9 @@ class Game {
   async start(){
     if(gameState === 0){
       player = new Player();
-      var playerCountRef = await database.ref('playerCount').once("value");
-      if(playerCountRef.exists()){
-        playerCount = playerCountRef.val();
+      var player_countRef = await database.ref('player_count').once("value");
+      if(player_countRef.exists()){
+        player_count = player_countRef.val();
         player.getCount();
       }
       form = new Form()
@@ -40,11 +40,21 @@ class Game {
     cars = [car1, car2, car3, car4];
   }
 
+  wincheck() {
+    abc = database.ref('winplayer')
+    abc.on("value",function(data){
+      winplayer : winplayer
+    });
+  }
+
   play(){
     form.hide();
-    
+    game.wincheck();
     Player.getPlayerInfo();
-    
+      //if (winplayer !== "") {
+    console.log(winplayer);
+    console.log(abc);
+      //}
     if(allPlayers !== undefined){
       background(rgb(198,135,103));
       image(track, 0,-displayHeight*4,displayWidth, displayHeight*5);
@@ -55,24 +65,30 @@ class Game {
       var index = 0;
 
       //x and y position of the cars
-      var x = 175 ;
+      var x = 300 ;
       var y;
+      if (0) {
 
+      }
       for(var plr in allPlayers){
         //add 1 to the index for every loop
         index = index + 1 ;
 
         //position the cars a little away from each other in x direction
-        x = x + 200;
+        x = x + 300;
         //use data form the database to display the cars in y direction
         y = displayHeight - allPlayers[plr].distance;
         cars[index-1].x = x;
         cars[index-1].y = y;
 
         if (index === player.index){
-          cars[index - 1].shapeColor = "red";
+          
           camera.position.x = displayWidth/2;
           camera.position.y = cars[index-1].y;
+          fill("blue")
+          strokeWeight(10);
+          ellipse(x,y,60,60);
+
         }
        
         //textSize(15);
