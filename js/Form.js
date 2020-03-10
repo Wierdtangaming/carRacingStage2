@@ -21,6 +21,7 @@ class Form {
     this.input.position(displayWidth/2 - 40 , displayHeight/2 - 80);
     this.button.position(displayWidth/2 + 30, displayHeight/2);
     this.reset.position(displayWidth-100,20);
+
     this.button.mousePressed(()=>{
       this.input.hide();
       this.button.hide();
@@ -32,15 +33,11 @@ class Form {
       this.greeting.html("Hello " + player.name)
       this.greeting.position(displayWidth/2 - 70, displayHeight/4);
     });
+
     this.reset.mousePressed(()=>{
       player.updateCount(0);
       game.update(0);
-      database.ref('winplayer').set({
-        winplayer : 'null'
-      })
+    });
 
-      
-    })
-    
   }
 }
